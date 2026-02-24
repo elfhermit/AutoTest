@@ -1,0 +1,33 @@
+# ===========================
+# AutoTest 專案 .gitignore
+# ===========================
+
+# --- 測試產物（每次執行自動產生） ---
+# HTML 驗收報告
+reports/*.html
+
+# AI Agent 測試過程產物（截圖、錄影、walkthrough）
+.agent/test_artifacts/*
+!.agent/test_artifacts/.gitkeep
+
+# Python 快取
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# --- 日誌 ---
+*.log
+
+# --- 系統檔案 ---
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# --- IDE / 編輯器 ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
