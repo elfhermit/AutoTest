@@ -2,10 +2,6 @@
 # AutoTest 專案 .gitignore
 # ===========================
 
-# --- 測試產物（每次執行自動產生） ---
-# HTML 驗收報告
-reports/*.html
-
 # AI Agent 測試過程產物（截圖、錄影、walkthrough）
 .agent/test_artifacts/*
 !.agent/test_artifacts/.gitkeep

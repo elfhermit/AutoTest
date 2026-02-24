@@ -1,0 +1,59 @@
+
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <title>自動化驗收報告</title>
+        <style>
+            body { font-family: "Microsoft JhengHei", sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #333; }
+            h1, h2, h3 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
+            code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+            pre { background: #282c34; color: #abb2bf; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+            img { max-width: 100%; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 1rem 0; }
+            .status-pass { color: green; font-weight: bold; }
+            .video-container { margin-bottom: 2rem; background: #f9f9f9; padding: 1rem; border-radius: 8px; }
+            .timestamp { color: #888; font-size: 0.9rem; }
+        </style>
+    </head>
+    <body>
+        <h1>🔍 自動化功能驗收報告</h1>
+        <p class="timestamp">報告生成時間：2026-02-23 16:29:36</p>
+        <hr>
+        <h1>TAIS 網站自動化測試歷程報告</h1>
+<h2>測試資訊</h2>
+<ul>
+<li><strong>測試時間</strong>: 2026-02-23 16:30:00</li>
+<li><strong>測試網址</strong>: https://tais.ith.sinica.edu.tw/</li>
+<li><strong>測試帳號</strong>: hywebmei</li>
+</ul>
+<h2>測試步驟與執行結果</h2>
+<h3>[步驟 1] 進入網站並測試頁面效能</h3>
+<ul>
+<li><strong>執行動作</strong>: 瀏覽全宗頁面，隨機進入「三田裕次所藏臺灣關係文書」，並切換至「單件」層級。</li>
+<li><strong>結果</strong>: <strong>Pass (成功)</strong>。各頁面間切換皆小於 5 秒，效能符合標準。</li>
+<li><strong>過程截圖</strong>:
+<img alt="全宗瀏覽畫面" src="C:/Users/A9014/.gemini/antigravity/brain/a73bec47-4c70-47b4-8210-357e4ab91dbc/.system_generated/click_feedback/click_feedback_1771834649576.png" /></li>
+</ul>
+<h3>[步驟 2] 執行登入流程</h3>
+<ul>
+<li><strong>執行動作</strong>: 在單件頁面點選右上角登入，輸入帳號密碼進行驗證。</li>
+<li><strong>結果</strong>: <strong>Pass (成功)</strong>。成功登入並於畫面上方顯示歡迎訊息。</li>
+<li><strong>過程截圖</strong>:
+<img alt="登入成功確認" src="C:/Users/A9014/.gemini/antigravity/brain/a73bec47-4c70-47b4-8210-357e4ab91dbc/.system_generated/click_feedback/click_feedback_1771834919351.png" /></li>
+</ul>
+<h3>[步驟 3] 驗證電子書圖檔燈箱</h3>
+<ul>
+<li><strong>執行動作</strong>: 嘗試開啟電子書圖檔燈箱 (最多嘗試 10 筆資料)。</li>
+<li><strong>過程紀錄</strong>:</li>
+<li>第 1 次嘗試網址 <code>https://tais.ith.sinica.edu.tw/browse-0000465041.html</code>，點擊燈箱後，因版權受限顯示需親至閱覽室調閱。
+  <img alt="限制版權測試" src="C:/Users/A9014/.gemini/antigravity/brain/a73bec47-4c70-47b4-8210-357e4ab91dbc/.system_generated/click_feedback/click_feedback_1771835067428.png" /></li>
+<li>第 2 次嘗試導向「臺灣古文書集 / 平埔族關係文書」目錄，嘗試網址 <code>https://tais.ith.sinica.edu.tw/browse-0000465294.html</code> (林菊承買突牡丹給墾溪埔所立給墾單字)，成功喚起燈箱開啟動作。
+  <img alt="燈箱點擊確認" src="C:/Users/A9014/.gemini/antigravity/brain/a73bec47-4c70-47b4-8210-357e4ab91dbc/.system_generated/click_feedback/click_feedback_1771835160348.png" /></li>
+<li><strong>結果</strong>: <strong>Pass (成功)</strong>。經更換資料夾嘗試後，系統可成功觸發並展開燈箱功能。</li>
+</ul>
+<h2>總結</h2>
+<p>本次自動化驗收測試 (Automation UI Test) 包含效能切換、身分驗證、以及電子書燈箱功能，全數流程皆符合預期，測試結果為 <strong>Pass</strong>。</p>
+        
+    </body>
+    </html>
+    
