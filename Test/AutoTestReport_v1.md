@@ -1,7 +1,7 @@
 # TAIS 網站瀏覽功能驗證 & 燈箱功能確認
 
 所需資訊: 
-- 前台網站 帳號/密碼: hywebmei / 1qaz2wsx
+- 前台網站 帳號/密碼: 你的帳號 / 你的密碼
 - 前台網站 URL: https://tais.ith.sinica.edu.tw/
 
 測試說明
