@@ -1,0 +1,123 @@
+{
+    "meta": {
+        "title": "Test Suite",
+        "base_url": "https://tais.ith.sinica.edu.tw/",
+        "environment": "",
+        "tested_by": "Agent Execution",
+        "date": "2026-02-25"
+    },
+    "summary": {
+        "total": 6,
+        "passed": 5,
+        "failed": 1,
+        "skipped": 0,
+        "duration_seconds": 120,
+        "started_at": "2026-02-25T06:00:00Z",
+        "finished_at": "2026-02-25T06:02:00Z"
+    },
+    "test_cases": [
+        {
+            "id": "TC-001",
+            "name": "首頁",
+            "status": "passed",
+            "duration_seconds": 15,
+            "steps": [
+                {
+                    "index": 0,
+                    "action": "goto",
+                    "target": "首頁，切換全宗範圍",
+                    "status": "passed",
+                    "screenshot": "TC-001.png"
+                }
+            ],
+            "video": "TC-001.webp",
+            "error": null
+        },
+        {
+            "id": "TC-002",
+            "name": "全宗瀏覽",
+            "status": "passed",
+            "duration_seconds": 20,
+            "steps": [
+                {
+                    "index": 0,
+                    "action": "click",
+                    "target": "全宗瀏覽",
+                    "status": "passed",
+                    "screenshot": "TC-002.png"
+                }
+            ],
+            "video": "TC-002.webp",
+            "error": null
+        },
+        {
+            "id": "TC-003",
+            "name": "影像瀏覽器",
+            "status": "passed",
+            "duration_seconds": 35,
+            "steps": [
+                {
+                    "index": 0,
+                    "action": "click",
+                    "target": "任一筆單件內容頁",
+                    "status": "passed",
+                    "screenshot": "TC-003.png"
+                }
+            ],
+            "video": "TC-003.webp",
+            "error": null
+        },
+        {
+            "id": "TC-004",
+            "name": "網站支援各種瀏覽裝置",
+            "status": "passed",
+            "duration_seconds": 10,
+            "steps": [
+                {
+                    "index": 0,
+                    "action": "goto",
+                    "target": "/",
+                    "status": "passed",
+                    "screenshot": "TC-004.png"
+                }
+            ],
+            "video": "TC-004.webp",
+            "error": null
+        },
+        {
+            "id": "TC-005",
+            "name": "關鍵字查詢",
+            "status": "passed",
+            "duration_seconds": 25,
+            "steps": [
+                {
+                    "index": 0,
+                    "action": "fill",
+                    "target": "input[name*=keyword]",
+                    "value": "南方資料館",
+                    "status": "passed",
+                    "screenshot": "TC-005.png"
+                }
+            ],
+            "video": "TC-005.webp",
+            "error": null
+        },
+        {
+            "id": "TC-006",
+            "name": "檢索驗證機制",
+            "status": "failed",
+            "duration_seconds": 45,
+            "steps": [
+                {
+                    "index": 0,
+                    "action": "screenshot",
+                    "target": "單一IP於一定時間內進行大量檢索",
+                    "status": "failed",
+                    "error": "The specific security verification feature did not appear under the tested conditions. Attempted >100 rapid requests but no CAPTCHA or '安全驗證功能' page was presented."
+                }
+            ],
+            "video": "TC-006.webp",
+            "error": "Failed to trigger rate limiting."
+        }
+    ]
+}
