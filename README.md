@@ -13,6 +13,13 @@
   - 效能初步查核（如：頁面載入時間、API 回應等待過久處理）。
 - **目標受眾**：PM（負責驗收功能是否符合需求）、SA（負責制訂測試規格與驗證標準）、QA（負責檢視最終報告與例外狀況）。
 
+## 🚀 快速入門 (Getting Started)
+新成員請先根據您的角色，閱讀以下入門教學：
+1. **[環境建置指南](docs/getting_started/01_Environment_Setup.md)** (全體必讀)：安裝 VS Code 與 AI 擴充套件。
+2. **[給 PM / SA 的零程式碼測試教學](docs/getting_started/02_Tutorial_for_PM_SA.md)**：學習如何用 Word 或 Markdown 寫測試案例讓 AI 跑。
+3. **[給 QA / PG 的進階技術與除錯教學](docs/getting_started/03_Tutorial_for_PG_QA.md)**：學習查看底層 log、截圖，以及微調 AI 行為。
+
+
 ## [執行步驟] 詳細執行步驟
 欲使用本專案進行自動化測試，請依循以下步驟操作：
 
@@ -81,6 +88,7 @@ AutoTest/
 **相關文件**
 - [SOP 操作手冊](SOP.md)：詳細的測試案例撰寫與操作教學。
 - [測試案例範例](Test/AutoTestReport_v1_1.md)：具體的 Markdown 測試案例參考。
+- [入門教學系列](docs/getting_started/)：針對 PM/SA/QA 等不同角色的快速入門指南。
 - [工程開發指南](CONTRIBUTING.md)：開發者專用，包含環境設定與技術細節。
 - [系統架構設計](docs/architecture.md)：系統流程圖與元件職責說明。
 
