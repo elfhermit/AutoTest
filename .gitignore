@@ -27,3 +27,8 @@ Desktop.ini
 *.swp
 *.swo
 *~
+
+# --- 測試產出物 (Test Artifacts) ---
+reports/*
+!reports/.gitkeep
+docs/report_*.docx
