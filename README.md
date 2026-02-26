@@ -83,3 +83,30 @@ AutoTest/
 - [測試案例範例](Test/AutoTestReport_v1_1.md)：具體的 Markdown 測試案例參考。
 - [工程開發指南](CONTRIBUTING.md)：開發者專用，包含環境設定與技術細節。
 - [系統架構設計](docs/architecture.md)：系統流程圖與元件職責說明。
+
+---
+
+## AI 技能 (Skills) 使用指南與範例
+
+為了讓非工程背景的成員能快速上手，本專案內建了幾個強大的 AI Skills，以下是具體的使用情境與觸發範例：
+
+### 1. `autoTestReport` (Markdown 網頁自動化測試)
+- **適用情境**：當您已經寫好了一份 Markdown (`.md`) 格式的測試案例，想讓 AI 自動打開網頁執行點擊、截圖，並產出 HTML 報告。
+- **輸入範例 (對話框)**：
+  > 「請依照 `Test/AutoTestReport_v1_1.md` 的步驟執行驗收測試。」
+  > 「幫我跑一下 `Test/AdvancedSearchTest.md`，並產生測試報告給 QA。」
+- **AI 執行內容**：讀取 Markdown 檔案 -> 啟動虛擬瀏覽器 -> 全程錄影並截圖 -> 判定每個步驟是否 Pass -> 輸出 `reports/Acceptance_Report_*.html`。
+
+### 2. `browser-test-reporter` (Word 文件網頁自動化測試)
+- **適用情境**：當您的測項是寫在 Word 文件 (`.docx`) 中（常見於傳統 PM/SA 發包規格），希望 AI 直接讀取 Word 表格進行測試，**並把測試結果 (Pass/Fail) 寫回 Word 文件中**，同時附上截圖與 HTML 報告。
+- **輸入範例 (對話框)**：
+  > 「請使用 `docs/test.docx` 進行自動化跑測，並產出報告。」
+  > 「幫我用 Word 檔做自動化測試，檔案在 `docs/test2.docx`。」
+- **AI 執行內容**：解析 Word 文件內容 -> 啟動虛擬瀏覽器測試 -> 將測試結果與截圖寫回一份新的 Word 文件（如 `docs/report_test.docx`）-> 同時輸出 HTML 網頁版報告。
+
+### 3. `wrap-up` (專案收尾與 Git 自動版控)
+- **適用情境**：當您（或工程師）完成了一次修改或測試，準備結束工作，希望 AI 幫忙整理剛剛的產出、把該進版控的程式碼透過 Git 提交，並且自動反思今天學到的經驗（記錄到 `lessons.md`）。
+- **輸入範例 (對話框)**：
+  > 「完成任務，幫我收尾 wrap up」
+  > 「close session」
+- **AI 執行內容**：檢查未提交的檔案 -> 生成符合規範的中文 Commit Message -> 提交進遠端分支 -> 記錄本次對話的知識點避免下次再犯。
