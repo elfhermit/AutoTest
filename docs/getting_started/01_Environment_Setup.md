@@ -4,35 +4,39 @@
 
 ---
 
-## 步驟一：安裝基礎環境
+## 步驟一：準備專案原始碼
 
-無論您是 PM、SA 還是工程師，都需要具備最基本的環境才能啟動 AI Agent。
+無論您是 PM、SA 還是工程師，都需要先取得專案原始碼才能開始測試。
 
-### 1. 安裝 Visual Studio Code (VS Code)
-本專案的 AI 工具深度整合於編輯器中，請確保已安裝 VS Code。
-- [下載並安裝 VS Code](https://code.visualstudio.com/)
-
-### 2. 下載並開啟專案原始碼
-透過 Git 或直接下載 ZIP 檔將本專案 (`AutoTest`) 解壓縮放在本機電腦中。
-1. 打開 VS Code。
-2. 點擊 `檔案 (File)` > `開啟資料夾 (Open Folder)`，選擇 `AutoTest` 目錄。
+1. **下載專案**：透過 Git Clone 或直接下載 ZIP 檔，將本專案 (`AutoTest`) 下載並解壓縮至您的本機電腦中。
+2. **記住路徑**：請記下此資料夾的存放路徑（例如 `C:\AutoTest` 或 `D:\AutoTest`）。
 
 ---
 
-## 步驟二：安裝 Antigravity IDE (Gemini Agent)
+## 步驟二：安裝與設定 Google Antigravity IDE
 
-本專案依賴強大的 AI 代理程式執行測試，請安裝官方提供的 Antigravity 擴充套件。
+本專案依賴 Google 專為 AI 代理程式開發的 **Antigravity IDE**。請依循以下步驟進行安裝與設定：
 
-1. 在 VS Code 左側活動列點擊 **延伸模組 (Extensions)** 圖示 (或按 `Ctrl+Shift+X`)。
-2. 於搜尋列輸入 `Antigravity` 或您組織專屬的 AI 擴充套件名稱。
-3. 點擊 **安裝 (Install)**。
-4. 安裝完成後，依據套件指示登入您的 Google 帳號或輸入專案的 API 授權金鑰。
+### 1. 下載與安裝 Antigravity IDE
+1. 前往 Google Antigravity 的內部發布平台或官方下載點，取得最新版本的安裝檔（Installer）。
+2. 雙擊執行安裝程式，並依循畫面指示完成標準安裝。
+3. 安裝完畢後，從應用程式選單中啟動 **Antigravity IDE**。
 
-### 配置 Workspace 權限
-為了讓 AI 能夠讀取您寫好的測試文件（如 `.md` 或 `.docx`），並將截圖、報告正確寫入 `reports/` 目錄：
-1. 確認您的 VS Code 當前開啟的根目錄是 `AutoTest`。
-2. 若系統跳出「是否信任此工作區 (Trust the authors of the files in this folder?)」的提示，請務必點選 **Yes, I trust the authors**。
-3. 您可以嘗試在 AI 聊天框輸入：「`Hello`」，確認 AI 有正常回應。
+### 2. 登入與授權
+第一次開啟 IDE 時，必須進行身分認證才能使用 AI 功能：
+1. 點擊畫面上的 **Sign In** (登入) 按鈕。
+2. 使用您的 Google 帳號完成 OAuth 授權登入，或輸入系統管理員配發的 API 授權金鑰。
+
+### 3. 載入工作區 (Workspace)
+為了讓 AI 能夠讀取您寫好的測試需求，並將產出的報告正確寫入 `reports/` 目錄：
+1. 在 Antigravity IDE 頂部選單，點擊 `File` (檔案) > `Open Folder...` (開啟資料夾)。
+2. 選擇您在步驟一準備好的 `AutoTest` 目錄。
+3. 若系統跳出安全性提示詢問「是否信任此工作區 (Trust the authors of the files in this folder?)」，請務必點選 **Yes, I trust the authors**，否則 AI 將無法寫入檔案。
+
+### 4. 驗證環境
+1. 尋找 IDE 介面中的 AI 聊天對話框 (Chat Panel)。
+2. 於文字框輸入：「`Hello`」。
+3. 若 AI 正常回覆問候語，即代表您的測試指揮中心已連線完畢！
 
 ---
 
