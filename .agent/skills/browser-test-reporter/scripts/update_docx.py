@@ -11,7 +11,8 @@ Usage:
     python scripts/update_docx.py docs/input.docx reports/results.json --output reports/report_input.docx
     python scripts/update_docx.py docs/input.docx reports/results.json \
         --output reports/report_input.docx \
-        --screenshots-dir ./reports/screenshots
+        --screenshots-dir ./reports/screenshots \
+        --walkthrough reports/walkthrough.md
 """
 from __future__ import annotations
 
@@ -142,6 +143,78 @@ def status_colour(status: str) -> tuple[RGBColor, str]:
 
 def status_label(status: str) -> str:
     return {"passed": "✅ PASS", "failed": "❌ FAIL", "skipped": "⏭ SKIP"}.get(status.lower(), status.upper())
+
+
+# ---------------------------------------------------------------------------
+# Markdown Walkthrough Parser
+# ---------------------------------------------------------------------------
+
+def _add_markdown_runs(paragraph, text: str) -> None:
+    """Very basic inline Markdown parser for **bold** and `code` tags."""
+    import re
+    # Remove basic Markdown links to just keep the text
+    text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
+    parts = text.split("**")
+    for i, part in enumerate(parts):
+        if not part:
+            continue
+        run = paragraph.add_run(part)
+        if i % 2 == 1:
+            run.font.bold = True
+
+def append_markdown_walkthrough(doc: Document, markdown_path: Path, screenshot_dir: Path) -> None:
+    text = markdown_path.read_text(encoding="utf-8")
+    doc.add_page_break()
+    
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            doc.add_paragraph()
+            continue
+        
+        if line.startswith("# "):
+            add_coloured_heading(doc, line[2:].strip(), level=1, colour=DARK)
+            add_horizontal_rule(doc)
+        elif line.startswith("## "):
+            doc.add_heading(line[3:].strip(), level=2)
+        elif line.startswith("### "):
+            doc.add_heading(line[4:].strip(), level=3)
+        elif line.startswith("!["):
+            # Image: ![alt](../test_output/screenshots/TC-001.png)
+            import re
+            m = re.search(r'!\[.*?\]\((.*?)\)', line)
+            if m:
+                img_path_str = m.group(1)
+                img_name = Path(img_path_str).name
+                img_path = screenshot_dir / img_name
+                if img_path.exists():
+                    p = doc.add_paragraph()
+                    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                    r = p.add_run()
+                    try:
+                        r.add_picture(str(img_path), width=Inches(5.5))
+                    except Exception as e:
+                        print(f"  [WARN] Could not embed screenshot {img_name}: {e}", file=sys.stderr)
+                else:
+                    doc.add_paragraph(f"[Image not found: {img_name}]").runs[0].font.color.rgb = RED
+        elif line.startswith("- ") or line.startswith("* "):
+            try:
+                p = doc.add_paragraph(style="List Bullet")
+            except KeyError:
+                p = doc.add_paragraph()
+                p.paragraph_format.left_indent = Pt(18)
+            _add_markdown_runs(p, line[2:].strip())
+        elif re.match(r"^\d+\.\s", line):
+            try:
+                p = doc.add_paragraph(style="List Number")
+            except KeyError:
+                p = doc.add_paragraph()
+                p.paragraph_format.left_indent = Pt(18)
+            content = re.sub(r"^\d+\.\s+", "", line)
+            _add_markdown_runs(p, content)
+        else:
+            p = doc.add_paragraph()
+            _add_markdown_runs(p, line)
 
 
 # ---------------------------------------------------------------------------
@@ -474,6 +547,7 @@ def main() -> None:
     parser.add_argument("results", help="Path to results.json (from run_tests.py)")
     parser.add_argument("--output", "-o", default="", help="Output .docx path (default: reports/report_<input>.docx)")
     parser.add_argument("--screenshots-dir", default="", help="Directory containing screenshot files")
+    parser.add_argument("--walkthrough", default="", help="Path to walkthrough.md (replaces standard json summary)")
     args = parser.parse_args()
 
     docx_path = Path(args.docx)
@@ -510,9 +584,25 @@ def main() -> None:
     n_updated = update_tables_in_place(doc, results, screenshot_dir)
     print(f"      Updated {n_updated} table cell(s)")
 
-    # Step 2: Append detailed summary section with screenshots
-    print("[3/3] Appending test execution summary...")
-    append_summary_section(doc, results, screenshot_dir)
+    # Step 2: Append detailed summary section with screenshots or walkthrough
+    if args.walkthrough and Path(args.walkthrough).exists():
+        print("[3/3] Appending markdown walkthrough...")
+        append_markdown_walkthrough(doc, Path(args.walkthrough), screenshot_dir)
+        # Add footer
+        meta = results.get("meta", {})
+        doc.add_paragraph()
+        footer_p = doc.add_paragraph()
+        footer_run = footer_p.add_run(
+            f"本報告由 browser-test-reporter skill 自動產生。\n"
+            f"Base URL: {meta.get('base_url', '—')}  |  環境: {meta.get('environment', '—')}"
+        )
+        footer_run.font.size = Pt(9)
+        footer_run.font.color.rgb = GREY
+        footer_run.font.italic = True
+    else:
+        print("[3/3] Appending json-based test execution summary...")
+        append_summary_section(doc, results, screenshot_dir)
+        
     doc.save(str(out_path))
 
     total = results.get("summary", {}).get("total", 0)

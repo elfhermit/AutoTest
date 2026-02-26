@@ -19,10 +19,10 @@ license: Apache 2.0
 
 | Script | Purpose |
 |--------|---------|
-| `scripts/parse_docx.py` | Extract structured test cases from `.docx` → JSON |
+| `scripts/parse_docx.exe` | Extract structured test cases from `.docx` → JSON |
 | `scripts/run_tests.py` | Execute test cases with Playwright (screenshots + video) |
-| `scripts/generate_report.py` | Build self-contained one-page HTML report |
-| `scripts/update_docx.py` | Inject results and screenshots back into the Word doc |
+| `scripts/generate_report.exe` | Build self-contained one-page HTML report |
+| `scripts/update_docx.exe` | Inject results and screenshots back into the Word doc |
 
 **Always run each script with `--help` first** to see its exact usage before invoking it.
 
@@ -31,16 +31,16 @@ license: Apache 2.0
 ## End-to-End Workflow
 
 ```
-Step 1  parse_docx.py      → reports/test_cases.json  (parse Word input)
+Step 1  parse_docx.exe      → reports/test_cases.json  (parse Word input)
 Step 2  AI Agent + browser_subagent  → reports/walkthrough.md + 截圖 + 錄影  (execute tests)
-Step 3  generate_report.py → reports/report.html  (build HTML report)
-Step 4  update_docx.py     → reports/report_<original>.docx  (update Word doc)
+Step 3  generate_report.exe → reports/report.html  (build HTML report)
+Step 4  update_docx.exe     → reports/report_<original>.docx  (update Word doc)
 ```
 
 ### Step 1 – Parse the Word Document
 
 ```bash
-python scripts/parse_docx.py docs/input.docx --output reports/test_cases.json
+.agent/skills/browser-test-reporter/scripts/parse_docx.exe docs/input.docx --output reports/test_cases.json
 ```
 
 - Calls `pandoc` to convert `.docx` → Markdown, then uses LLM-friendly JSON schema
@@ -66,7 +66,7 @@ python scripts/parse_docx.py docs/input.docx --output reports/test_cases.json
 ### Step 3 – Generate HTML Report
 
 ```bash
-python scripts/generate_report.py reports/results.json \
+.agent/skills/browser-test-reporter/scripts/generate_report.exe reports/results.json \
   --screenshots-dir ./reports/screenshots \
   --videos-dir ./reports/videos \
   --output reports/report.html
@@ -80,8 +80,9 @@ python scripts/generate_report.py reports/results.json \
 ### Step 4 – Update Word Document
 
 ```bash
-python scripts/update_docx.py docs/input.docx reports/results.json \
+.agent/skills/browser-test-reporter/scripts/update_docx.exe docs/input.docx reports/results.json \
   --screenshots-dir ./reports/screenshots \
+  --walkthrough reports/walkthrough.md \
   --output reports/report_input.docx
 ```
 
